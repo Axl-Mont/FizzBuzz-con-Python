@@ -41,6 +41,7 @@ def percentage_str(list_n, name):
     count = list_n.count(name)
     result=(count/len(list_n))*100
     print(f"\nEl porcentaje de aparición de {name} es: {result:.2f}%")
+
 def percentage_int(n_count):
     """
     Calcula y muestra el porcentaje de números enteros en una lista.
@@ -81,4 +82,5 @@ def main():
     percentage_str(n_list,"Buzz")
     percentage_str(n_list,"FizzBuzz")
     percentage_int(n_list)
+
 main()
