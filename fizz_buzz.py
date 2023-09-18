@@ -21,9 +21,11 @@ def fizz_buzz(init,end):
     Returns:
         list: Una lista que contiene el resultado de recorrer los números en el rango [init, end]
     """
+    init_int = int(init)
+    end_int = int(end)
 
     numbers_list = []
-    for i in range(init, end + 1):
+    for i in range(init_int, end_int + 1):
         if i % 3 == 0 and i % 5 == 0:
             numbers_list.append('FizzBuzz')
         elif i % 3 == 0:
@@ -33,6 +35,32 @@ def fizz_buzz(init,end):
         else:
             numbers_list.append(i)
     return numbers_list
+
+def validated(init, fnd):
+    """
+    Valida dos valores para asegurarse de que sean numéricos y que
+    el valor de inicio no sea mayor que el valor final.
+
+    Parameters:
+    init (str): El valor de inicio que se debe validar y convertir a entero.
+    fnd (str): El valor final que se debe validar y convertir a entero.
+
+    Returns:
+    bool: True si los valores son válidos y el valor de inicio no es mayor que el
+          valor final; False en caso contrario.
+    """
+    try:
+        init_int = int(init)
+        end_int = int(fnd)
+
+        if init_int > end_int:
+            print('\nEl parámetro de Inicio no puede ser mayor al Final')
+            return False
+    except ValueError:
+        print('\nEl inicio y el final deben ser valores numéricos')
+        return False
+
+    return True
 
 def percentage_str(list_n, name):
     """
@@ -63,24 +91,32 @@ def percentage_int(n_count):
 def main():
     """
     Realiza el juego Fizz-Buzz y calcula el porcentaje de resultados.
-    
+
+    Esta función inicia el juego Fizz-Buzz, solicitando al usuario que ingrese
+    un rango de inicio y fin. Luego muestra una lista de resultados del juego
+    junto con el porcentaje de aparición de 'Fizz', 'Buzz', 'FizzBuzz' y números enteros.
+
     Args:
-    None
+        None
 
     Returns:
-    None: La función imprime los resultados en la consola.
+        None: La función imprime los resultados en la consola y no devuelve valores.
     """
-    print(' Bienvenido a Fizz-Buzz')
-    inicio = int(input('\nIngresa el número donde quieres Ininiciar: '))
-    fin = int(input('Ingresea el número donde quieras Finalizar: '))
-    n_list = fizz_buzz(inicio,fin)
-    print("\nResultados:")
-    for result in n_list:
-        print(result)
-    print(f'El total de numeros en el rango es:{len(n_list)}')
-    percentage_str(n_list,"Fizz")
-    percentage_str(n_list,"Buzz")
-    percentage_str(n_list,"FizzBuzz")
-    percentage_int(n_list)
+    print('\nBienvenido a Fizz-Buzz')
+    inicio = input('\nIngresa el número donde quieres Ininiciar: ')
+    fin = input('Ingresea el número donde quieras Finalizar: ')
+    if validated(inicio,fin):
+        n_list = fizz_buzz(inicio,fin)
+        print("\nResultados:")
+        for result in n_list:
+            print(result)
+        print(f'El total de numeros en el rango es:{len(n_list)}')
+        percentage_str(n_list,"Fizz")
+        percentage_str(n_list,"Buzz")
+        percentage_str(n_list,"FizzBuzz")
+        percentage_int(n_list)
+    else:
+        print('\n Intenta Nuevamente')
+        main()
 
 main()
