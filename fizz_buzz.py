@@ -16,27 +16,29 @@ def get_input():
 
 def validated(init, end):
     """
-    Valida que los parámetros de inicio y fin sean números y que el inicio no sea mayor que el fin.
+    Valida los parámetros de entrada para un rango numérico.
 
-    Args:
-        init (str): El número de inicio ingresado por el usuario.
-        end (str): El número de fin ingresado por el usuario.
+    Parámetros:
+    - init (str o int): El valor de inicio del rango.
+    - end (str o int): El valor de fin del rango.
 
-    Returns:
-        bool: True si la validación es exitosa, False en caso contrario.
+    Retorna:
+    - bool: True si los parámetros son válidos y el valor de inicio no es mayor que el valor de fin,
+            False en caso contrario.
     """
-    try:
-        init_int = int(init)
-        end_int = int(end)
-
-        if init_int > end_int:
-            print('\nEl parámetro de inicio no puede ser mayor al final')
+    if init.isdigit():
+        if end.isdigit():
+            if init> end:
+                print('\nEl parámetro de inicio no puede ser mayor al final')
+                return False
+            else:
+                return True
+        else:
+            print('\nEl FINAL deben ser un valor numérico positivo')
             return False
-    except ValueError:
-        print('\nEl inicio y el final deben ser valores numéricos')
+    else:
+        print('\nEl INICIO deben ser un valor numérico positivo')
         return False
-
-    return True
 
 def fizz_buzz(init, end):
     """
@@ -53,13 +55,14 @@ def fizz_buzz(init, end):
     Returns:
         list: Una lista que contiene números o las cadenas "Fizz", "Buzz" o "FizzBuzz".
     """
-    numbers_list = ["FizzBuzz" if item % 2 == 0 and item % 3 == 0 else
+    numbers_list = ["FizzBuzz" if item % 3 == 0 and item % 5 == 0 else
                     "Fizz" if item % 3 == 0 else
                     "Buzz" if item % 5 == 0 else
                     item
                     for item in range(init, end + 1)
                     ]
     return numbers_list
+
 
 def percentage_str(list_str):
     """
@@ -76,6 +79,7 @@ def percentage_str(list_str):
         result = (count / len(list_str)) * 100
         print(f"\nEl porcentaje de aparición de {i} es: {result:.2f}%")
 
+
 def percentage_int(list_int):
     """
     Calcula y muestra el porcentaje de aparición de números en la lista.
@@ -91,6 +95,7 @@ def percentage_int(list_int):
     result = (count / len(list_int)) * 100
     print(f"\nEl porcentaje de aparición de números es: {result:.2f}%")
 
+
 def print_results(list_final):
     """
     Imprime los resultados finales, incluyendo la lista de números y los porcentajes de aparición.
@@ -105,6 +110,7 @@ def print_results(list_final):
     percentage_str(list_final)
     percentage_int(list_final)
 
+
 def main():
     """
     Función principal que maneja la interacción con el usuario y controla la ejecución del programa.
@@ -112,7 +118,7 @@ def main():
     print('\nBienvenido a Fizz-Buzz')
     count = 0
 
-    while count < 3:
+    while count < 5:
         user_input = get_input()
 
         if user_input:
@@ -125,8 +131,9 @@ def main():
             print('\n Intenta nuevamente')
             count += 1
 
-    if count == 3:
+    if count == 5:
         print('\nDemasiados intentos fallidos. Saliendo del programa.')
+
 
 if __name__ == "__main__":
     main()
